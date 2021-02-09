@@ -18,6 +18,7 @@ resource "postgresql_role" "new_user" {
   password = random_password.password.result
   skip_reassign_owned = true
   skip_drop_role = true
+  superuser = true
 }
 
 resource "postgresql_grant" "all_access" {
