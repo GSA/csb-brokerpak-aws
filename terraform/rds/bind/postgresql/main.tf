@@ -18,7 +18,6 @@ resource "postgresql_role" "new_user" {
   password = random_password.password.result
   skip_reassign_owned = true
   skip_drop_role = true
-  superuser = true
 }
 
 resource "postgresql_grant" "all_access" {
@@ -28,4 +27,9 @@ resource "postgresql_grant" "all_access" {
   schema      = "public"
   object_type = "table"
   privileges  = ["ALL"]
+}
+
+resource "postgresql_grant_role" "grant_root" {
+  role              = postgresql_role.new_user.name
+  grant_role        = "rds_superuser"
 }
