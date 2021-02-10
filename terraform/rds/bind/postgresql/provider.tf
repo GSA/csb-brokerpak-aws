@@ -19,4 +19,5 @@ provider "postgresql" {
   password        = var.admin_password
   database        = var.db_name
   sslmode         = var.use_tls ? "require" : "disable" 
+  superuser       = false
 }
