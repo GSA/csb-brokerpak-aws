@@ -1,7 +1,7 @@
 {
-  "name": "spring-music-validator",
+  "name": "postgres-validator",
   "version": "0.1.0",
-  "description": "Connect and validate spring-music data store",
+  "description": "Connect and validate postgres data store",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
@@ -10,14 +10,10 @@
   "keywords": [
     "nodeje"
   ],
-  "author": "Ernie Billing",
+  "author": "mcampo",
   "license": "Apache-2.0",
   "dependencies": {
-    "mongodb": "^3.6.6",
-    "mssql": "^7.0.0",
-    "mysql": "^2.18.1",
-    "pg": "^8.6.0",
-    "redis": "^3.1.2",
+    "pg": "^8.5.1",
     "restify": "^8.5.1",
     "vcap_services": "^0.7.1"
   }
