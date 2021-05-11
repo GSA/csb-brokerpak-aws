@@ -68,7 +68,6 @@ provision:
     - field_name: domain
       type: string
       details: AWS SES Domain Identity
-      # default: ${config("aws.secret_access_key")}
       default: "ssb-dev.datagov.us"
   computed_inputs:
   - name: labels

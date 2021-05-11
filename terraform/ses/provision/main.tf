@@ -12,14 +12,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-#resource "aws_ses_domain_identity" "domain" {
-#  domain = var.domain
-#}
-
-#resource "aws_ses_domain_dkim" "dkim" {
-#  domain = aws_ses_domain_identity.domain.domain
-#}
-
 data "aws_route53_zone" "zone" {
   name = var.domain
 }

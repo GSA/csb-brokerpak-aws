@@ -12,8 +12,4 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# output arn { value = aws_ses_domain_identity.datagov_us.arn}
 output region { value = var.region }
-# output smtp_server {
-#   value = format("email-smtp.%s.amazonaws.com", var.region)
-# }
