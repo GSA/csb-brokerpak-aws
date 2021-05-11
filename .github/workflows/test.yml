@@ -47,4 +47,4 @@ jobs:
       run: make run &
 
     - name: Run examples (tests)
-      run: make run-examples
+      run: service_name=csb-aws-ses example_name=ses  make run-examples
