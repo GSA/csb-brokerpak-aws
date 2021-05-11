@@ -20,24 +20,24 @@
 #  domain = aws_ses_domain_identity.domain.domain
 #}
 
-data "aws_route53_zone" "datagov_us" {
+data "aws_route53_zone" "zone" {
   name = var.domain
 }
 
-resource "aws_ses_domain_identity" "datagov_us" {
+resource "aws_ses_domain_identity" "identity" {
   domain = var.domain
 }
 
-resource "aws_route53_record" "datagov_us_amazonses_verification_record" {
-  zone_id = data.aws_route53_zone.datagov_us.zone_id
-  name    = "_amazonses.${aws_ses_domain_identity.datagov_us.id}"
+resource "aws_route53_record" "record" {
+  zone_id = data.aws_route53_zone.zone.zone_id
+  name    = "_amazonses.${aws_ses_domain_identity.identity.id}"
   type    = "TXT"
   ttl     = "600"
-  records = [aws_ses_domain_identity.datagov_us.verification_token]
+  records = [aws_ses_domain_identity.identity.verification_token]
 }
 
-resource "aws_ses_domain_identity_verification" "datagov_us_verification" {
-  domain = aws_ses_domain_identity.datagov_us.id
+resource "aws_ses_domain_identity_verification" "verification" {
+  domain = aws_ses_domain_identity.identity.id
 
-  depends_on = [aws_route53_record.datagov_us_amazonses_verification_record]
+  depends_on = [aws_route53_record.record]
 }
