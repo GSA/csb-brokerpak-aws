@@ -3,6 +3,11 @@ IAAS=aws
 DOCKER_OPTS=--rm -v $(PWD):/brokerpak -w /brokerpak --network=host
 CSB=cfplatformeng/csb
 
+ifndef AWS_ZONE
+# AWS_ZONE (or aws.zone in the config file) is the domain to be used for any created subdomains
+AWS_ZONE=example.com
+endif
+
 ###### Help ###################################################################
 
 .DEFAULT_GOAL = help
@@ -35,6 +40,7 @@ run: build aws_access_key_id aws_secret_access_key ## start broker with this bro
 	-e SECURITY_USER_PASSWORD \
 	-e AWS_ACCESS_KEY_ID \
 	-e AWS_SECRET_ACCESS_KEY \
+	-e AWS_ZONE \
 	-e "DB_TYPE=sqlite3" \
 	-e "DB_PATH=/tmp/csb-db" \
 	-e GSB_PROVISION_DEFAULTS \

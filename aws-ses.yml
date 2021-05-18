@@ -68,7 +68,7 @@ provision:
     - field_name: domain
       type: string
       details: AWS SES Domain Identity
-      default: "ssb-dev.datagov.us"
+      default: ${config("aws.zone")}
   computed_inputs:
   - name: labels
     default: ${json.marshal(request.default_labels)}
