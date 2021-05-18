@@ -10,6 +10,7 @@ jobs:
       # For storing the Terraform state for the deployment
       AWS_ACCESS_KEY_ID: "${{ secrets.AWS_ACCESS_KEY_ID }}"
       AWS_SECRET_ACCESS_KEY: "${{ secrets.AWS_SECRET_ACCESS_KEY }}"
+      AWS_ZONE: "${{ secrets.AWS_ZONE }}"
 
     # Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
     defaults:
@@ -18,12 +19,6 @@ jobs:
 
     # Checkout the repository to the GitHub Actions runner
     steps:
-    - name: Install the eden OSBAPI CLI tool
-      run: |
-        wget -q -O - https://raw.githubusercontent.com/starkandwayne/homebrew-cf/master/public.key | sudo apt-key add -
-        echo "deb http://apt.starkandwayne.com stable main" | sudo tee /etc/apt/sources.list.d/starkandwayne.list
-        sudo apt-get update
-        sudo apt-get install eden
     - uses: actions/checkout@v2
       with:
         fetch-depth: '0'
@@ -32,6 +27,8 @@ jobs:
       run: |
         echo "AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID" > .env.secrets
         echo "AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY" >> .env.secrets
+        echo "AWS_ZONE=$AWS_ZONE" >> .env.secrets
+
     - name: Build
       run: make build
 
