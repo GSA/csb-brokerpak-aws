@@ -107,6 +107,10 @@ bind:
     default: csb-${request.binding_id}
     overwrite: true
     type: string
+  - name: instance_name
+    default: ${instance.name}
+    overwrite: true
+    type: string
   template_refs:
     main: terraform/ses/bind/main.tf
     outputs: terraform/ses/bind/outputs.tf
