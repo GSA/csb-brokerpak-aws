@@ -12,6 +12,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+
+locals {
+  instance_id = "ses-${substr(sha256(var.instance_name), 0, 16)}"
+}
+
 data "aws_route53_zone" "zone" {
   name = var.domain
 }
@@ -22,7 +27,7 @@ resource "aws_ses_domain_identity" "identity" {
 
 resource "aws_route53_record" "record" {
   zone_id = data.aws_route53_zone.zone.zone_id
-  name    = "_amazonses.${aws_ses_domain_identity.identity.id}"
+  name    = "${local.instance_id}.${aws_ses_domain_identity.identity.id}"
   type    = "TXT"
   ttl     = "600"
   records = [aws_ses_domain_identity.identity.verification_token]

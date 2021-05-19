@@ -74,6 +74,10 @@ provision:
     default: ${json.marshal(request.default_labels)}
     overwrite: true
     type: object
+  - name: instance_name
+    required: true
+    type: string
+    default: ${request.instance_id}
   template_refs:
     main: terraform/ses/provision/main.tf
     outputs: terraform/ses/provision/outputs.tf

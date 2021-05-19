@@ -18,4 +18,9 @@ variable "domain" {
  default     = "ssb-dev.datagov.us"
 }
 
+variable "instance_name" {
+  type    = string
+  default = ""
+}
+
 # variable "domain" { type = string }
