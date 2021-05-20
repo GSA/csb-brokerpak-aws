@@ -27,7 +27,7 @@ resource "aws_ses_domain_identity" "identity" {
 
 resource "aws_route53_record" "record" {
   zone_id = data.aws_route53_zone.zone.zone_id
-  name    = "${local.instance_id}.${aws_ses_domain_identity.identity.id}"
+  name    = "_amazonses.${local.instance_id}.${aws_ses_domain_identity.identity.id}."
   type    = "TXT"
   ttl     = "600"
   records = [aws_ses_domain_identity.identity.verification_token]
