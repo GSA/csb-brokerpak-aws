@@ -12,8 +12,13 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+
+locals {
+  instance_id = "ses-${substr(sha256(var.instance_name), 0, 16)}"
+  user_name = "${local.instance_id}-${var.user_name}"
+}
 resource "aws_iam_user" "user" {
-    name = var.user_name
+    name = local.user_name
     path = "/cf/"
 }
 
@@ -22,7 +27,7 @@ resource "aws_iam_access_key" "access_key" {
 }
 
 resource "aws_iam_user_policy" "user_policy" {
-    name   = format("%s-p", var.user_name)
+    name   = format("%s-p", local.user_name)
 
     user   = aws_iam_user.user.name
 

@@ -13,3 +13,8 @@
 # limitations under the License.
 
 variable user_name { type = string }
+
+variable "instance_name" {
+  type    = string
+  default = ""
+}
